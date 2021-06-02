@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "efm-langserver": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1621432300,
+        "narHash": "sha256-xw3W3wvSTVvvCAG8YsXAqxrof4m58d81CntDb/DInOI=",
+        "owner": "mattn",
+        "repo": "efm-langserver",
+        "rev": "0e684cd869c2d3aa8e4dd0e680ebf5f006cb63e5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattn",
+        "repo": "efm-langserver",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -122,6 +138,7 @@
     },
     "root": {
       "inputs": {
+        "efm-langserver": "efm-langserver",
         "flake-utils": "flake-utils",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixpkgs": "nixpkgs_2"

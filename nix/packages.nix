@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, buildGoModule, inputs, ... }:
 let
   lua-format = pkgs.stdenv.mkDerivation {
     name = "lua-format";
@@ -11,6 +11,16 @@ let
     };
 
     buildInputs = with pkgs; [ cmake ];
+  };
+
+  efm-langserver = buildGoModule rec {
+    name = "efm-langserver";
+
+    src = inputs.efm-langserver;
+
+    doCheck = false;
+
+    vendorSha256 = "1whifjmdl72kkcb22h9b1zadsrc80prrjiyvyba2n5vb4kavximm";
   };
 in
   with pkgs; [
@@ -30,8 +40,6 @@ in
 
     # rust
     rust-analyzer
-    # clippy
-    # cargo
     rustup
 
     # golang
@@ -80,4 +88,7 @@ in
     fzf
     bat
     ripgrep
+
+    # lint/format
+    efm-langserver
   ]

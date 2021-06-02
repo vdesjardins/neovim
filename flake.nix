@@ -3,6 +3,10 @@
     nixpkgs.url = "nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
+    # tools
+    efm-langserver.url = "github:mattn/efm-langserver";
+    efm-langserver.flake = false;
   };
 
   outputs = { self, ... }@inputs:
@@ -14,7 +18,7 @@
             overlays = [ inputs.neovim-nightly-overlay.overlay ];
           };
 
-          legacyPackages = import ./nix/packages.nix { inherit pkgs; };
+          legacyPackages = pkgs.callPackage ./nix/packages.nix { inherit inputs; };
         in
           {
             devShell = pkgs.mkShell {
