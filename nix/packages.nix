@@ -1,94 +1,70 @@
-{ pkgs, buildGoModule, inputs, ... }:
-let
-  lua-format = pkgs.stdenv.mkDerivation {
-    name = "lua-format";
+{ pkgs, ... }:
+with pkgs; [
+  # neovim
+  neovim-nightly
+  python3
+  python3Packages.pynvim
 
-    src = pkgs.fetchgit {
-      url = "https://github.com/Koihik/LuaFormatter.git";
-      rev = "78b3d90ca49818bc72ef4ec39409924c33daa020";
-      sha256 = "0snfh4h9s0xb2cayyqzjjqg4b0vq589ln2yb0ci5n2xm15dchycl";
-      fetchSubmodules = true;
-    };
+  # nix
+  rnix-lsp
+  nixfmt
 
-    buildInputs = with pkgs; [ cmake ];
-  };
+  # lua
+  sumneko-lua-language-server
+  lua5_3
+  lua-format
 
-  efm-langserver = buildGoModule rec {
-    name = "efm-langserver";
+  # rust
+  rust-analyzer
+  rustup
 
-    src = inputs.efm-langserver;
+  # golang
+  go
+  gocode
+  gopls
 
-    doCheck = false;
+  # terraform
+  terraform
+  terraform-ls
+  tflint
 
-    vendorSha256 = "1whifjmdl72kkcb22h9b1zadsrc80prrjiyvyba2n5vb4kavximm";
-  };
-in
-  with pkgs; [
-    # neovim
-    neovim-nightly
-    python3
-    python3Packages.pynvim
+  # bash
+  shellcheck
+  shfmt
+  nodePackages.bash-language-server
 
-    # nix
-    rnix-lsp
-    nixfmt
+  # cpp
+  gcc
+  poco
+  cmake
+  clang-tools
+  cppcheck
 
-    # lua
-    sumneko-lua-language-server
-    lua5_3
-    lua-format
+  # make
+  checkmake
 
-    # rust
-    rust-analyzer
-    rustup
+  # VIM
+  vim-vint
 
-    # golang
-    go
-    gocode
-    gopls
+  # markdown
 
-    # terraform
-    terraform
-    terraform-ls
-    tflint
+  # yaml
+  nodePackages.yaml-language-server
+  yamllint
 
-    # bash
-    shellcheck
-    shfmt
-    nodePackages.bash-language-server
+  # docker
+  hadolint
 
-    # cpp
-    gcc
-    poco
-    cmake
-    clang-tools
-    cppcheck
+  # json
+  nodePackages.vscode-json-languageserver-bin
+  nodePackages.fixjson
+  jq
 
-    # make
-    checkmake
+  # tools
+  fzf
+  bat
+  ripgrep
 
-    # VIM
-    vim-vint
-
-    # markdown
-
-    # yaml
-    nodePackages.yaml-language-server
-    yamllint
-
-    # docker
-    hadolint
-
-    # json
-    nodePackages.vscode-json-languageserver-bin
-    nodePackages.fixjson
-    jq
-
-    # tools
-    fzf
-    bat
-    ripgrep
-
-    # lint/format
-    efm-langserver
-  ]
+  # lint/format
+  efm-langserver
+]

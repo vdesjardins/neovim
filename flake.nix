@@ -7,29 +7,42 @@
     # tools
     efm-langserver.url = "github:mattn/efm-langserver";
     efm-langserver.flake = false;
+    # lua-format.url = "github.com:Koihik/LuaFormatter";
+    # lua-format.flake = false;
+    # TODO: does not work yet
+    # lua-format.submodules = true;
   };
 
   outputs = { self, ... }@inputs:
-    inputs.flake-utils.lib.eachDefaultSystem (
-      system:
-        let
-          pkgs = import inputs.nixpkgs {
-            inherit system;
-            overlays = [ inputs.neovim-nightly-overlay.overlay ];
-          };
-
-          legacyPackages = pkgs.callPackage ./nix/packages.nix { inherit inputs; };
-        in
-          {
-            devShell = pkgs.mkShell {
-              buildInputs = legacyPackages;
+    let
+      tools-overlay = import ./nix/overlay.nix inputs;
+    in
+      inputs.flake-utils.lib.eachDefaultSystem (
+        system:
+          let
+            pkgs = import inputs.nixpkgs {
+              inherit system;
+              overlays = [
+                inputs.neovim-nightly-overlay.overlay
+                tools-overlay
+              ];
             };
 
-            legacyPackages = legacyPackages;
-          }
-    )
-    // {
-      overlay = inputs.neovim-nightly-overlay.overlay;
-      hmModule = import ./nix/neovim.nix;
-    };
+            legacyPackages = import ./nix/packages.nix { inherit pkgs; };
+          in
+            {
+              devShell = pkgs.mkShell {
+                buildInputs = legacyPackages;
+              };
+
+              legacyPackages = legacyPackages;
+            }
+      )
+      // {
+        overlays = [
+          inputs.neovim-nightly-overlay.overlay
+          tools-overlay
+        ];
+        hmModule = import ./nix/neovim.nix;
+      };
 }
