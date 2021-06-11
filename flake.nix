@@ -39,10 +39,11 @@
             }
       )
       // {
-        overlays = [
-          inputs.neovim-nightly-overlay.overlay
-          tools-overlay
-        ];
+        overlays = {
+          neovim-nightly-overlay = inputs.neovim-nightly-overlay.overlay;
+          tools-overlay = tools-overlay;
+        };
+
         hmModule = import ./nix/neovim.nix;
       };
 }
