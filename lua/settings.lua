@@ -9,7 +9,6 @@ vim.o.inccommand = "nosplit" -- Show effects of a command incrementally
 vim.o.joinspaces = false -- No double spaces with join after a dot
 vim.o.scrolloff = 4 -- Lines of context
 vim.o.fileencoding = "utf-8" -- Encode files using UTF-8
-vim.o.t_Co = "256" -- Support 256 colors
 vim.o.termguicolors = true -- True color support
 vim.o.background = "dark" -- Always dark background
 vim.o.wildmenu = true -- Command-line completion mode
