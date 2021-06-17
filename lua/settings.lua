@@ -18,7 +18,6 @@ vim.o.timeoutlen = 500 -- to to wait for mapped sequence to complete
 
 vim.o.errorbells = false -- No sound on errors
 vim.o.visualbell = false
-vim.o.t_vb = ""
 vim.o.clipboard = "unnamedplus" -- OS and tmux clipboard transparent access
 
 -- GUI
