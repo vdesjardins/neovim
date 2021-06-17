@@ -14,20 +14,25 @@
   };
 
   outputs = { self, ... }@inputs:
-    let tools-overlay = import ./nix/overlay.nix inputs;
-    in inputs.flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import inputs.nixpkgs {
-          inherit system;
-          overlays = [ inputs.neovim-nightly-overlay.overlay tools-overlay ];
-        };
+    let
+      tools-overlay = import ./nix/overlay.nix inputs;
+    in
+      inputs.flake-utils.lib.eachDefaultSystem (
+        system:
+          let
+            pkgs = import inputs.nixpkgs {
+              inherit system;
+              overlays = [ inputs.neovim-nightly-overlay.overlay tools-overlay ];
+            };
 
-        legacyPackages = import ./nix/packages.nix { inherit pkgs; };
-      in {
-        devShell = pkgs.mkShell { buildInputs = legacyPackages; };
+            legacyPackages = import ./nix/packages.nix { inherit pkgs; };
+          in
+            {
+              devShell = pkgs.mkShell { buildInputs = legacyPackages; };
 
-        legacyPackages = legacyPackages;
-      }) // {
+              legacyPackages = legacyPackages;
+            }
+      ) // {
         overlays = {
           neovim-nightly = inputs.neovim-nightly-overlay.overlay;
           tools = tools-overlay;
