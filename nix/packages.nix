@@ -60,7 +60,7 @@ with pkgs;
 ) ++ (
   if enableTerraform then [
     # terraform
-    terraform
+    terraform_0_15
     terraform-ls
     tflint
   ] else
