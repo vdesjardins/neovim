@@ -2,20 +2,20 @@
 let cfg = config.programs.neovim;
 in {
   options.programs.neovim = with lib; {
-    enableNix = mkEnableOption "Nix component" // { default = true; };
-    enableLua = mkEnableOption "Lua component" // { default = true; };
-    enableRust = mkEnableOption "Rust component" // { default = true; };
-    enableGolang = mkEnableOption "Go component" // { default = true; };
+    enableNix = mkEnableOption "Nix component" // { default = false; };
+    enableLua = mkEnableOption "Lua component" // { default = false; };
+    enableRust = mkEnableOption "Rust component" // { default = false; };
+    enableGolang = mkEnableOption "Go component" // { default = false; };
     enableTerraform = mkEnableOption "Terraform component" // {
-      default = true;
+      default = false;
     };
-    enableBash = mkEnableOption "Bash component" // { default = true; };
-    enableCpp = mkEnableOption "C++ component" // { default = true; };
-    enableMake = mkEnableOption "Make component" // { default = true; };
-    enableVim = mkEnableOption "VIM component" // { default = true; };
-    enableYaml = mkEnableOption "YAML component" // { default = true; };
-    enableDocker = mkEnableOption "Docker component" // { default = true; };
-    enableJson = mkEnableOption "JSON component" // { default = true; };
+    enableBash = mkEnableOption "Bash component" // { default = false; };
+    enableCpp = mkEnableOption "C++ component" // { default = false; };
+    enableMake = mkEnableOption "Make component" // { default = false; };
+    enableVim = mkEnableOption "VIM component" // { default = false; };
+    enableYaml = mkEnableOption "YAML component" // { default = false; };
+    enableDocker = mkEnableOption "Docker component" // { default = false; };
+    enableJson = mkEnableOption "JSON component" // { default = false; };
   };
 
   config = lib.mkIf cfg.enable {
