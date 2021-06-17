@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
-let cfg = config.programs.neovim;
-in {
+let
+  cfg = config.programs.neovim;
+in
+{
   options.programs.neovim = with lib; {
     enableNix = mkEnableOption "Nix component" // { default = false; };
     enableLua = mkEnableOption "Lua component" // { default = false; };
@@ -35,13 +37,14 @@ in {
       extraConfig = ''
         lua require('init')
       '';
+    };
 
-      extraPackages = import ./packages.nix {
-        inherit pkgs;
-        inherit (cfg)
-          enableNix enableLua enableRust enableGolang enableTerraform enableBash
-          enableCpp enableMake enableVim enableYaml enableDocker enableJson;
-      };
+    home.packages = import ./packages.nix {
+      inherit pkgs;
+      inherit (cfg)
+        enableNix enableLua enableRust enableGolang enableTerraform enableBash
+        enableCpp enableMake enableVim enableYaml enableDocker enableJson
+        ;
     };
 
     xdg.configFile."nvim/lua".source = ../lua;
