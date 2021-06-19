@@ -25,7 +25,21 @@
               overlays = [ inputs.neovim-nightly-overlay.overlay tools-overlay ];
             };
 
-            legacyPackages = import ./nix/packages.nix { inherit pkgs; };
+            legacyPackages = import ./nix/packages.nix {
+              inherit pkgs;
+              enableNix = true;
+              enableLua = true;
+              enableRust = true;
+              enableGolang = true;
+              enableTerraform = true;
+              enableBash = true;
+              enableCpp = true;
+              enableMake = true;
+              enableVim = true;
+              enableYaml = true;
+              enableDocker = true;
+              enableJson = true;
+            };
           in
             {
               devShell = pkgs.mkShell { buildInputs = legacyPackages; };
