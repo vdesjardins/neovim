@@ -15,7 +15,6 @@ function cfg.lsp_setup()
       "json",
       "cpp",
       "c",
-      "terraform",
     },
     settings = {
       rootMarkers = { ".git/", ".git", ".root" },
@@ -49,7 +48,6 @@ function cfg.lsp_setup()
         json = { { lintCommand = "jq ." }, { formatCommand = "fixjson" } },
         cpp = { { lintCommand = "cppcheck -q --language=c++ --enable=style" } },
         c = { { lintCommand = "cppcheck -q --language=c --enable=style" } },
-        terraform = { { formatCommand = "terraform fmt -", formatStdin = true } },
       },
     },
   }
