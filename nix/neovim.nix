@@ -33,9 +33,6 @@ in
       withNodeJs = true;
 
       withRuby = false;
-
-      extraConfig = ''
-      '';
     };
 
     home.packages = import ./packages.nix {
