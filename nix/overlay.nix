@@ -11,7 +11,8 @@ inputs: final: prev: rec {
       fetchSubmodules = true;
     };
 
-    buildInputs = with prev.pkgs; [ cmake gcc ];
+    buildInputs = with prev.pkgs; [ unzip ];
+    nativeBuildInputs = with prev.pkgs; [ cmake ];
   };
 
   efm-langserver = prev.pkgs.buildGoModule rec {
