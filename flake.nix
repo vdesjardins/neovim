@@ -28,13 +28,13 @@
             legacyPackages = import ./nix/packages.nix {
               inherit pkgs;
               enableNix = true;
-              enableLua = true;
+              enableLua = if pkgs.stdenv.isDarwin then false else true;
               enableRust = true;
               enableGolang = true;
               enableTerraform = true;
               enableBash = true;
               enableCpp = true;
-              enableMake = true;
+              enableMake = if pkgs.stdenv.isDarwin then false else true;
               enableVim = true;
               enableYaml = true;
               enableDocker = true;
