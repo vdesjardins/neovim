@@ -12,7 +12,7 @@ inputs: final: prev: rec {
     };
 
     buildInputs = with prev.pkgs; [ unzip ];
-    nativeBuildInputs = with prev.pkgs; [ cmake ];
+    nativeBuildInputs = with prev.pkgs; [ cmake clang_12 ];
   };
 
   efm-langserver = prev.pkgs.buildGoModule rec {
